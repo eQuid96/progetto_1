@@ -129,15 +129,19 @@ void getWinner(player *ptr1, player *ptr2){
 
 void playGame(int player){
   int card1,card2,isSame,isEnd;
+  
   // SWITCH DEL PUNTATORE DEL GIOCATORE
-  if(player == 1){
+  if (player == 1) 
+  {
     ptr = &player1;
-  }else{
+  }
+  else
+  {
     ptr = &player2;
   }
-    getPlayerName(ptr);
-    printf("Scegli le carte da scoprire,inserici il numero delle carte(0,39): ");
-    scanf("%d %d",&card1,&card2);
+   getPlayerName(ptr);
+   printf("Scegli le carte da scoprire,inserici il numero delle carte(0,39): ");
+   scanf("%d %d",&card1,&card2);
   // CONTROLLI PER LA SICUREZZA DEL GIOCO
    if (card1 == card2){
       printf(RED"[Info]: Non puoi scegliere la stessa carta.\n"RESET);
@@ -148,26 +152,26 @@ void playGame(int player){
      playGame(ATT_PLAYER);
     }
   // END CONTROLLI
-      getPlayerName(ptr);
+     
       isSame = sameCard(card1,card2);
       if(!isSame)
       {
+        getPlayerName(ptr);
         printf(RED"Le carte non sono uguali tocca al prossimo giocatore..\n"RESET);
         ATT_PLAYER = ptr->opponent;
         playGame(ATT_PLAYER);
+        return;
       }
-      else
-      {
-        addPlayerPoint(ptr);
-        printf(GRN"Le carte sono uguali!,hai guadagnato un punto. Punteggio Giocatore: %d\n"RESET,getPlayerPoint(ptr));
-        scopriCarte(card1,card2);
-        stampCamp(field,40);
-        isEnd = isEndGame(&player1,&player2);
-        if(isEnd)
-        {
-          getWinner(&player1,&player2);
-          return;
-        }
-          playGame(ATT_PLAYER);
-        }
+      addPlayerPoint(ptr);
+      printf(GRN"Le carte sono uguali!,hai guadagnato un punto. Punteggio Giocatore: %d\n"RESET,getPlayerPoint(ptr));
+      scopriCarte(card1,card2);
+      stampCamp(field,40);
+      isEnd = isEndGame(&player1,&player2);
+      if(!isEnd)
+       {
+         playGame(ATT_PLAYER);
+       }else{
+         getWinner(&player1,&player2);
+       }
+  return;
 }
