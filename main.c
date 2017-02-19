@@ -10,6 +10,14 @@ int main(){
   printf("Benvenuto,scegli quante volte mischiare il mazzo di carte: ");
   scanf("%d",&n);
   printf("Hai deciso di mischiare il mazzo %d volte.\n",n);
+  if (TESTING_MODE){
+    printf("Campo da gioco non mischiato:\n");
+    testMode(field,40);
+    mescola(field,n);
+    printf("-------------------------------\n");
+    printf("Campo da gioco mischiato %d volte:\n",n);
+    testMode(field,40);
+  }
   mescola(field,n);
   printf("Giocatore1 scegli il tuo nome: ");
   scanf("%s",&name1);
@@ -31,7 +39,6 @@ int main(){
   return 0;
 }
 
-
 void stampCamp(int array[], int len){
   int i;
   for(i=0;i<len;i++){
@@ -50,6 +57,24 @@ void stampCamp(int array[], int len){
   }
 }
 
+
+void testMode(int array[], int len){
+  int i;
+  for(i=0;i<len;i++){
+    if (i == 9 || i == 19 || i == 29 || i == 39){
+      if(array[i]!=0){
+        printf(YEL" %d \n"RESET,array[i]);
+      }else{
+        printf(GRN" ✔ \n"RESET);
+      }
+    }
+    else if(array[i] == 0){
+       printf(GRN" ✔ "RESET);
+    }else{
+      printf(YEL" %d "RESET,array[i]);
+    }
+  }
+}
 
 int sameCard(int card1, int card2){
   if(field[card1] != field[card2]){

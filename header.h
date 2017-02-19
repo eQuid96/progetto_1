@@ -3,6 +3,7 @@
 #define GRN   "\x1B[32m"
 #define RESET "\x1B[0m"   // Costanti per i colori dei printf.
 #define RED   "\x1B[31m"
+#define TESTING_MODE 0 // Costante per il printf del campo in testing mode,(visulizzazione dei numeri delle carte per vedere quante volte mischia)
 
 int field[40] = {1,2,3,4,5,6,7,8,9,10,
                  1,2,3,4,5,6,7,8,9,10,    // CAMPO DA GIOCO 0-39 CARTE
@@ -36,4 +37,5 @@ void playGame(int player);
 void scopriCarte(int card1, int card2);
 int isEndGame(player *ptr1,player *ptr2);
 void setName(char *player_name,player *ptr);
+void testMode(int array[], int len);
 // End Funzioni.
