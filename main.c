@@ -123,13 +123,17 @@ void scopriCarte(int card1, int card2){
   field[card2] = 0;
 }
 
+// Function per il controllo del vincitore
+// Essendoci 40 carte, il massimo punteggio che si può ottenere è 20 punti
+// Controllo quindi se la somma dei punteggi dei due giocatori è == 20.
+
 int isEndGame(player *ptr1,player *ptr2){
   unsigned int sum;
   sum = (unsigned int)ptr1->point + ptr2->point;
   if (sum == 20){
-    return 1;
+    return 1; // Gioco completato.
   }else{
-    return 0;
+    return 0; // Gioco non ancora completato.
   }
 }
 
@@ -165,9 +169,12 @@ void playGame(int player){
     ptr = &player2;
   }
    getPlayerName(ptr);
-   printf("Scegli le carte da scoprire,inserici il numero delle carte(0,39): ");
+   printf("Scegli le carte da scoprire,inserici il numero delle carte(1,40): ");
    scanf("%d %d",&card1,&card2);
-  // CONTROLLI PER LA SICUREZZA DEL GIOCO
+   card1--; 
+   card2--; // decremento l'indice delle carte perchè l'array va da 0 a 39;
+  
+ // CONTROLLI PER LA SICUREZZA DEL GIOCO
    if (card1 == card2){
       printf(RED"[Info]: Non puoi scegliere la stessa carta.\n"RESET);
       playGame(ATT_PLAYER);
@@ -176,8 +183,7 @@ void playGame(int player){
      printf(RED"[Info] Non puoi scegliere carte già scoperte.\n"RESET);
      playGame(ATT_PLAYER);
     }
-  // END CONTROLLI
-     
+ // END
       isSame = sameCard(card1,card2);
       if(!isSame)
       {
