@@ -21,7 +21,7 @@ player player2 = {"Giocatore2",0,1};
 
 player *ptr;  // puntantore per la gestione dei player
 
-extern unsigned short ATT_PLAYER = 0;  // Variabile esterna per controllare il turno di ogni giocatore.
+unsigned short ATT_PLAYER = 0;  // Variabile esterna per controllare il turno di ogni giocatore.
 
 
 // Funzioni gestionali
